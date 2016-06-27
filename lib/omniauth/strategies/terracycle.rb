@@ -12,7 +12,8 @@ module OmniAuth
 
         country_code = options.country_code
         domain = OmniAuth::TerraCycle::Country.domain_for_code(country_code)
-        base_uri = "https://api.terracycle.#{domain}"
+        # base_uri = "https://api.terracycle.#{domain}"
+        base_uri = "https://api.oauth.terracycle.hu"
 
         options.client_options = {
           site:          base_uri+'/api',
@@ -44,6 +45,10 @@ module OmniAuth
 
       def raw_info
         @raw_info ||= access_token.get('/v2/account').parsed['account']
+      end
+
+      def callback_url
+        full_host + script_name + callback_path
       end
     end
   end
