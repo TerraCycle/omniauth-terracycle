@@ -12,7 +12,7 @@ module OmniAuth
 
         country_code = options.country_code
         domain = OmniAuth::TerraCycle::Country.domain_for_code(country_code)
-        base_uri = "https://api.terracycle.#{domain}"
+        base_uri = ENV['OAUTH_HOST'] || "https://api.terracycle.#{domain}"
 
         options.client_options = {
           site:          base_uri+'/api',
